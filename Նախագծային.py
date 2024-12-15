@@ -156,7 +156,44 @@ def show_mathnax_info():
 
 
 def show_mathnax4_info():
-    None
+    delate_pages()
+    graph_label = ctk.CTkLabel(main_frame, text="Հաշվարկների մաս", font=('Bold', 35), text_color = 'black')
+    graph_label.pack(pady=100)
+
+    def btn_delete():
+        name_func.delete(0, 'end')
+    
+    def btn_click():
+        expression1 = name_func1.get()
+        expression2 = name_func2.get() 
+        if not expression1 or expression2:
+            return messagebox.showerror("Error", "Please enter a function.")
+        
+        try:
+            text_content1 = (
+            "")
+            mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+            mathnax1_text.place(x=10, y=250)
+        except Exception as e:
+            messagebox.showerror("Error", f"Invalid input: {e}")
+
+
+    btn1 = ctk.CTkButton(main_frame, text = 'show', fg_color = 'red', command = btn_click)
+    btn1.place(relx = 0.05, rely = 0.85, relheight = 0.05, relwidth = 0.1)
+    btn2 = ctk.CTkButton(main_frame, text = 'delete', fg_color = 'red', command = btn_delete)
+    btn2.place(rely = 0.85, relx = 0.85,  relheight = 0.05, relwidth = 0.1)
+
+
+    name_func = ctk.CTkEntry(main_frame, fg_color = 'white', text_color = 'black', textvariable='Տարի')
+    name_func.place(rely = 0.4, relx = 0.05, relwidth = 0.45)
+    name_func1 = ctk.CTkEntry(main_frame, fg_color = 'white', text_color = 'black')
+    name_func1.place(rely = 0.4, relx = 0.53, relwidth = 0.45)
+
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=home_page)
+    back_button.place(x=780, y=750)
+
+
+
 
 def show_mathnax3_info():
     delate_pages()
@@ -2911,7 +2948,7 @@ main_frame = ctk.CTkFrame(
     width=850, height=1000
 )
 main_frame.pack(side="left", fill="both", expand=True)
-
+start_page()
 root.mainloop()
 
 
