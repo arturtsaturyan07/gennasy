@@ -149,8 +149,14 @@ def show_mathnax_info():
     mathnax2_button.place(x=100, y=370)
     mathnax3_button = ctk.CTkButton(main_frame, text="Եզրակացություն", font=('Bold', 20), command=show_mathnax3_info)
     mathnax3_button.place(x=100, y=440)
+    mathnax4_button = ctk.CTkButton(main_frame, text="Պրոդուկտ", font=('Bold', 20), command=show_mathnax4_info)
+    mathnax4_button.place(x=100, y=510)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=home_page)
     back_button.place(x=780, y=750)
+
+
+def show_mathnax4_info():
+    None
 
 def show_mathnax3_info():
     delate_pages()
