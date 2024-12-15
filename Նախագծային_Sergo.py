@@ -448,6 +448,8 @@ def show_calculator_info():
             ctk.CTkButton(root, text=text, width=5, height=1, font=("Arial", 20, "bold"), border_width=1, text_color="#fff", fg_color="#FFA500", command=command).place(x=x, y=y)
         else:
             ctk.CTkButton(root, text=text, width=5, height=1, font=("Arial", 20, "bold"), border_width=1, text_color="#fff", fg_color="#2a2d36", command=command).place(x=x, y=y)
+    
+    root.mainloop()
 
 def show_math_info():
     delate_pages()
