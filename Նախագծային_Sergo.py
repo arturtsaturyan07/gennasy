@@ -144,9 +144,11 @@ def show_mathnax4_info():
         expression2 = name_func2.get() 
         try:
             text_content = (
-            f"Ոսկու գրավով՝ {int(expression1) * (113/100)*int(expression2)}\n",
-            f"Տան գրավով՝ {int(expression1) * (115/100)*int(expression2)}\n",
-            f"Սովորական գրավով՝ {int(expression1) * (119/100)*int(expression2)}")
+            f"Ոսկու գրավով՝ {(int(expression2))+(int(expression2)*(113/100)*int(expression1))}\n",
+            f"Տան գրավով՝ {int(expression2) * (115/100)*int(expression1)}\n",
+            f"Սպառողական գրավով՝ {int(expression2) * (119/100)*int(expression1)}\n",
+            f"Ավանդ՝ {int(expression2) * ((110/100)**int(expression1))}\n"
+            f"Ինֆլյացիա {int(expression2) * ((114/100)**int(expression1))}")
             mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
             mathnax1_text.place(x=50, y=400)
         except Exception as e:
@@ -333,7 +335,6 @@ def show_calculator_info():
 
     equation = ""
     label_result = ctk.CTkLabel(root, width=25, height=2, text="", font=("Arial", 30), fg_color="#171616", text_color="white") 
-    label_result.pack()
 
     def show(value):
         nonlocal equation
@@ -367,7 +368,7 @@ def show_calculator_info():
             equation = result
         except:
             equation = "Error"
-        label_result.config(text=equation)
+        label_result.configure(text=equation)
 
     def log_base_function():
         nonlocal equation
@@ -449,6 +450,7 @@ def show_calculator_info():
         else:
             ctk.CTkButton(root, text=text, width=5, height=1, font=("Arial", 20, "bold"), border_width=1, text_color="#fff", fg_color="#2a2d36", command=command).place(x=x, y=y)
     
+    label_result.pack()
     root.mainloop()
 
 def show_math_info():
