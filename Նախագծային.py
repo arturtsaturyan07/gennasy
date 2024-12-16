@@ -1,11 +1,18 @@
 import customtkinter as ctk
+from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import math
 from tkinter import messagebox
 
-ctk.set_appearance_mode("dark") 
+ctk.set_appearance_mode('light') 
 ctk.set_default_color_theme("blue")  
+
+set_image = Image.open("settings_icon.png")
+info_image = Image.open("analytics_icon.png")
+list_image = Image.open("list_icon.png")
+return_image = Image.open("returns_icon.png")
+side_image = Image.open("side-img.png")
 
 root = ctk.CTk()
 root.geometry("1000x800")
@@ -15,7 +22,7 @@ def start_page():
     delate_pages()
     start_frame = ctk.CTkFrame(main_frame, fg_color="transparent")
     start_frame.pack(pady=20)
-    
+
     welcome_label = ctk.CTkLabel(
         start_frame,
         text="Բարև, Բարի գալուստ, Genasy",
@@ -23,6 +30,11 @@ def start_page():
         text_color="black"
     )
     welcome_label.pack(pady=100)
+
+    welcom_image = ctk.CTkImage(light_image=side_image, size=(200, 1000))  
+
+    image_label = ctk.CTkLabel(start_frame, image=welcom_image, text="") 
+    image_label.pack(pady=50)
 
 def hide_indicators():
     home_indicate.configure(fg_color='#c3c3c3')
@@ -101,6 +113,23 @@ def set_page():
     )
     lb.pack(pady=100)
 
+    def switcher():
+        if switch_var.get() == "on":
+            ctk.set_appearance_mode("dark")
+        else:
+            ctk.set_appearance_mode("light")
+
+    switch_var = ctk.StringVar(value="off") 
+    theme_switch = ctk.CTkSwitch(
+    set_frame, 
+    text="dark mode", 
+    variable=switch_var, 
+    onvalue="on", 
+    offvalue="off", 
+    command=switcher
+    )
+    theme_switch.place(relx = 0, rely=0.9)
+
 
 def show_graph_info():
     delate_pages()
@@ -144,7 +173,7 @@ def show_graph_info():
     name_func = ctk.CTkEntry(main_frame, fg_color = 'white', text_color = 'black')
     name_func.place(rely = 0.5, relx = 0.25, relwidth = 0.45)
 
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=home_page, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image), command=home_page, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax4_info():
@@ -162,7 +191,7 @@ def show_mathnax_info():
     mathnax3_button.place(x=100, y=440)
     mathnax4_button = ctk.CTkButton(main_frame, text="Պրոդուկտ", font=('Bold', 20), command=show_mathnax4_info, corner_radius=32) 
     mathnax4_button.place(x=100, y=510)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=home_page, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=home_page, image = ctk.CTkImage(return_image), corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax3_info():
@@ -182,7 +211,7 @@ def show_mathnax3_info():
     mathnax33_button.place(x=100, y=540)
     mathnax34_button = ctk.CTkButton(main_frame, text="Ինֆլ. և վարկեր(սովորական)", font=('Bold', 20), command=show_mathnax34_info, corner_radius=32)
     mathnax34_button.place(x=100, y=610)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax34_info():
@@ -199,7 +228,7 @@ def show_mathnax34_info():
         "6-ից մեծ են, որը իրատեսական է։")
     mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     mathnax1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax3_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax3_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax33_info():
@@ -215,7 +244,7 @@ def show_mathnax33_info():
         "3-ից մեծ են, որը շահութաբեր կլինի։։")
     mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     mathnax1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax3_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax3_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax32_info():
@@ -232,7 +261,7 @@ def show_mathnax32_info():
         "2 տարով, որը այդքան էլ ձեռնտու չէ։")
     mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     mathnax1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax3_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax3_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 
@@ -246,7 +275,7 @@ def show_mathnax31_info():
         "մեջ այդ դեպքում ավելի նպատակահարմար է հենց ավանդ դնելը։ \n")
     mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     mathnax1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax3_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax3_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax2_info():
@@ -259,7 +288,7 @@ def show_mathnax2_info():
         "ֆինանսական գործարքներում։")
     mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     mathnax1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_mathnax1_info():
@@ -278,7 +307,7 @@ def show_mathnax1_info():
         "Նազարյան Գագիկ - Տվյալների որոնում ,մշակում,փոխանցում")
     mathnax1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     mathnax1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_mathnax_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_mathnax_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_pythonnax_info():
@@ -293,7 +322,7 @@ def show_pythonnax_info():
     graph_button.place(x=100, y=450)
     calculator_button = ctk.CTkButton(main_frame, text="Հաշվիչ", font=('Bold', 20), command=show_calculator_info, corner_radius=32)
     calculator_button.place(x=100, y=520)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=home_page, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image), command=home_page, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_python_info():
@@ -304,7 +333,7 @@ def show_python_info():
     show_Python_Concepts_for_Beginners_button.place(x=150, y=240)
     show_Python_Concepts_for_Mid_Level_button = ctk.CTkButton(main_frame, text="Python-ի սկզբունքներ միջին մակարդակի համար", font=('Bold', 20), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     show_Python_Concepts_for_Mid_Level_button.place(x=150, y=310)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_pythonnax_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_pythonnax_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 
@@ -426,7 +455,7 @@ def show_math_info():
     show_Math_10class_2Term_button.place(x=100, y=310)
     show_Math_11class_1Term_button = ctk.CTkButton(main_frame, text="Մաթեմատիկա 11-րդ դասարան 1-ին կիսամյակ", font=('Bold', 20), command=show_Math_11class_1Term, corner_radius=32)
     show_Math_11class_1Term_button.place(x=100, y=380)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_pythonnax_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_pythonnax_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Python_Concepts_for_Beginners():
@@ -445,7 +474,7 @@ def show_Python_Concepts_for_Beginners():
     Lists_button.place(x=100, y=520)
     Loops_button = ctk.CTkButton(main_frame, text="Ցիկլեր", font=('Bold', 20), command=show_Loops_info, corner_radius=32)
     Loops_button.place(x=100, y=590)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_python_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_python_info, corner_radius=32)
     back_button.place(x=780, y=750)
   
 def show_Python_Concepts_for_Mid_Level():
@@ -466,7 +495,7 @@ def show_Python_Concepts_for_Mid_Level():
     Tuples_and_Sets_button.place(x=100, y=590)
     Lambda_Functions_button = ctk.CTkButton(main_frame, text="Լամբդա ֆունկցիաներ", font=('Bold', 20), command=show_Lambda_Functions_info, corner_radius=32)
     Lambda_Functions_button.place(x=100, y=660)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_python_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_python_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Math_10class_1Term():
@@ -477,7 +506,7 @@ def show_Math_10class_1Term():
     Real_Numbers_button.place(x=100, y=260)
     Element_of_Trigonometry_button = ctk.CTkButton(main_frame, text="Եռանկյունաչափության տարրեր", font=('Bold', 20), command=show_Element_of_Trigonometry, corner_radius=32)
     Element_of_Trigonometry_button.place(x=100, y=330)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_math_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_math_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Math_10class_2Term():
@@ -488,7 +517,7 @@ def show_Math_10class_2Term():
     Function_button.place(x=80, y=260)
     Trigonometric_Functions_and_Equations_button = ctk.CTkButton(main_frame, text="Եռանկյունաչափական ֆունկցիաներ և հավասարումներ", font=('Bold', 20), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     Trigonometric_Functions_and_Equations_button.place(x=80, y=330)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_math_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_math_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Math_11class_1Term():
@@ -501,7 +530,7 @@ def show_Math_11class_1Term():
     Pointar_Function_button.place(x=100, y=330)
     Log_Function_button = ctk.CTkButton(main_frame, text="Լոգարիթմական ֆունկցիաներ", font=('Bold', 20), command=show_Log_Function, corner_radius=32)
     Log_Function_button.place(x=100, y=400)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_math_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_math_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 
@@ -517,7 +546,7 @@ def show_Real_Numbers():
     Real_Numbers_Properties_button.place(x=100, y=400)
     Real_Numbers_Presentation_button = ctk.CTkButton(main_frame, text="Թվային առանցքով ներկայացումը", font=('Bold', 20), command=show_Real_Numbers_Presentation, corner_radius=32)
     Real_Numbers_Presentation_button.place(x=100, y=470)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Math_10class_1Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_10class_1Term, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Real_Numbers_Defiition():
@@ -533,7 +562,7 @@ def show_Real_Numbers_Defiition():
         "կոտորակներով, օրինակ՝ π-ն կամ √2-ը):")
     real_numbers_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     real_numbers_text.place(x=10, y=200)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Real_Numbers, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Real_Numbers, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Real_Numbers_Types():
@@ -553,7 +582,7 @@ def show_Real_Numbers_Types():
         "չկրկնվող դեցիմալ (օր.՝ √2, π):\n\n")
     real_numbers_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     real_numbers_text.place(x=10, y=200)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command= show_Real_Numbers, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command= show_Real_Numbers, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Real_Numbers_Properties():
@@ -575,7 +604,7 @@ def show_Real_Numbers_Properties():
         "թիվ ունի բազմապատկման հակադարձ (1/a՝ a≠0-ի համար):\n")
     real_numbers_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     real_numbers_text.place(x=10, y=200)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Real_Numbers, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Real_Numbers, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Real_Numbers_Presentation():
@@ -589,7 +618,7 @@ def show_Real_Numbers_Presentation():
         "ունի իրական թիվ։")
     real_numbers_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     real_numbers_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Real_Numbers, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Real_Numbers, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry():
@@ -610,7 +639,7 @@ def show_Element_of_Trigonometry():
     Element_of_Trigonometry_Graph_button.place(x=100, y=540)
     Element_of_Trigonometry_Application_button = ctk.CTkButton(main_frame, text="Կիրառություններ", font=('Bold', 20), command=show_Element_of_Trigonometry_Application, corner_radius=32)
     Element_of_Trigonometry_Application_button.place(x=100, y=610)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Math_10class_1Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_10class_1Term, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Angels():
@@ -626,7 +655,7 @@ def show_Element_of_Trigonometry_Angels():
         "Ռադիաններ: Ամենամեծ շրջանով չափվում է 2𝜋 ռադիան:\n")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Triangle():
@@ -646,7 +675,7 @@ def show_Element_of_Trigonometry_Triangle():
         "անկյունիհարևանությամբ, սակայն ոչ հիպոտենուզան։\n")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Relation():
@@ -671,7 +700,7 @@ def show_Element_of_Trigonometry_Relation():
         "ctg(𝜃) = մոտավորը / ընդհակառակը")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Circle():
@@ -689,7 +718,7 @@ def show_Element_of_Trigonometry_Circle():
         "(cos(θ), sin(θ))")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Equation():
@@ -711,7 +740,7 @@ def show_Element_of_Trigonometry_Equation():
         "cos(2θ) = cos²(θ) - sin²(θ)\n")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Graph():
@@ -727,7 +756,7 @@ def show_Element_of_Trigonometry_Graph():
         "պարբերություն π:")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Element_of_Trigonometry_Application():
@@ -742,7 +771,7 @@ def show_Element_of_Trigonometry_Application():
         "և այլ երևույթների մոդելավորման համար։")
     element_of_trigonometry_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     element_of_trigonometry_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Element_of_Trigonometry, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Element_of_Trigonometry, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function():
@@ -759,7 +788,7 @@ def show_Function():
     Function_Graph_button.place(x=100, y=400)
     Function_Aplication_button = ctk.CTkButton(main_frame, text="Ֆունկցիաների կիրառություններ", font=('Bold', 20), command=show_Function_Aplication, corner_radius=32)
     Function_Aplication_button.place(x=100, y=470)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Math_10class_2Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_10class_2Term, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Bases():
@@ -772,7 +801,7 @@ def show_Function_Bases():
     Function_Bases_Presentation_button.place(x=100, y=260)
     Function_Bases_Termins_button = ctk.CTkButton(main_frame, text="Տերմիններ", font=('Bold', 20), command=show_Function_Bases_Termins, corner_radius=32)
     Function_Bases_Termins_button.place(x=100, y=330)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Types():
@@ -785,7 +814,7 @@ def show_Function_Types():
     Function_Types_Relation_button.place(x=100, y=260)
     Function_Types_Typic_button = ctk.CTkButton(main_frame, text="Հատուկ ֆունկցիաներ", font=('Bold', 20), command=show_Function_Types_Typic, corner_radius=32)
     Function_Types_Typic_button.place(x=100, y=330)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Function_Bases_Defination():
@@ -799,7 +828,7 @@ def show_Function_Bases_Defination():
         "(արժեքների տիրույթ)միայն մեկ տարրին։\n")
     Function_Bases_Defination_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Bases_Defination_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function_Bases, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function_Bases, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Bases_Presentation():
@@ -814,7 +843,7 @@ def show_Function_Bases_Presentation():
         "Բառային նկարագրություն՝ կապը նկարագրված բառերով")
     Function_Bases_Presentation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Bases_Presentation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function_Bases, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function_Bases, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Bases_Termins():
@@ -828,7 +857,7 @@ def show_Function_Bases_Termins():
         "ելքային արժեքները (կարող է ներառել ավելորդ արժեքներ)։\n")
     Function_Bases_Termins_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Bases_Termins_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function_Bases, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function_Bases, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Types_Expresion():
@@ -846,7 +875,7 @@ def show_Function_Types_Expresion():
         "օրինակ՝ f(x) = x^3 − 2x^2 + x։\n")
     Function_Types_Expresion_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Types_Expresion_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function_Types, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function_Types, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Types_Relation():
@@ -863,7 +892,7 @@ def show_Function_Types_Relation():
         "Բիժեկտիվ (Bijective)՝ և՛ մեկից-մեկ, և՛ դեպի։\n")
     Function_Types_Relation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Types_Relation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function_Types, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function_Types, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Types_Typic():
@@ -881,7 +910,7 @@ def show_Function_Types_Typic():
         "f(x) = a^x, log(x)։\n")
     Function_Types_Typic_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Types_Typic_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function_Types, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function_Types, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Function_Properties():
@@ -902,7 +931,7 @@ def show_Function_Properties():
         "Կենտ՝ Սիմետրիկ սկզբնակետի նկատմամբ, f(−x) = −f(x)։\n")
     Function_Types_Typic_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Types_Typic_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Graph():
@@ -919,7 +948,7 @@ def show_Function_Graph():
         "Ասիմպտոտներ (տրացեր՝ ռացիոնալ ֆունկցիաների դեպքում)։\n")
     Function_Types_Typic_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Types_Typic_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Function_Aplication():
@@ -935,7 +964,7 @@ def show_Function_Aplication():
         "Իրական կյանք՝ եղանակի կանխատեսում, բնակչության աճ։")
     Function_Types_Typic_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Function_Types_Typic_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Functions_and_Equations():
@@ -956,7 +985,7 @@ def show_Trigonometric_Functions_and_Equations():
     Trigonometric_Aplication_button.place(x=60, y=610)
     Trigonometric_Circle_button = ctk.CTkButton(main_frame, text="Միավոր շրջանը", font=('Bold', 20), command=show_Trigonometric_Circle, corner_radius=32)
     Trigonometric_Circle_button.place(x=60, y=680)
-    back_button = ctk.CTkButton(main_frame, text="Back", font=('Bold', 15), command=show_Math_10class_2Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_10class_2Term, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Trigonometric_Main():
@@ -976,7 +1005,7 @@ def show_Trigonometric_Main():
         "(բացառությամբ հիպոտենուզի)։\n")
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Relation():
@@ -998,7 +1027,7 @@ def show_Trigonometric_Relation():
         "cotθ = 1/tanθ                 Հիպոտենուզ - Ներքնաձիք") 
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Similarity():
@@ -1017,7 +1046,7 @@ def show_Trigonometric_Similarity():
         "cotθ = cosθ/sinθ\n") 
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Value():
@@ -1034,7 +1063,7 @@ def show_Trigonometric_Value():
         "90°       1              0            Չսահմանված     0  \n") 
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Equation():
@@ -1056,7 +1085,7 @@ def show_Trigonometric_Equation():
         "tanθ = k՝ θ = tan⁻¹(k) + nπ։\n") 
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Aplication():
@@ -1077,7 +1106,7 @@ def show_Trigonometric_Aplication():
         "հեռավորությունների չափում։\n") 
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Trigonometric_Circle():
@@ -1093,7 +1122,7 @@ def show_Trigonometric_Circle():
         "x = cosθ, y = sinθ։\n") 
     Trigonometric_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Trigonometric_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Trigonometric_Functions_and_Equations, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Scalar_Function():
@@ -1115,7 +1144,7 @@ def show_Scalar_Function():
     Scalar_Function_Diagrame_button.place(x=60, y=620)
     Scalar_Function_Use_button = ctk.CTkButton(main_frame, text="Օգտագործումներ", font=('Bold', 20), command=show_Scalar_Function_Use, corner_radius=32)
     Scalar_Function_Use_button.place(x=60, y=690)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Math_11class_1Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_11class_1Term, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Scalar_Function_Use():
@@ -1131,7 +1160,7 @@ def show_Scalar_Function_Use():
         "𝑁(𝑡) = 𝑁₀𝑒⁻ᵏᵗ\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Scalar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Scalar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Scalar_Function_Diagrame():
@@ -1144,7 +1173,7 @@ def show_Scalar_Function_Diagrame():
         "Հարթ և շարունակական կոր։\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Scalar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Scalar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Scalar_Function_Properties():
@@ -1163,7 +1192,7 @@ def show_Scalar_Function_Properties():
         "քանի որ 𝑓(0) = 𝑎 ⋅ 𝑏^0 = 𝑎։\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Scalar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Scalar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Scalar_Function_Main():
@@ -1177,7 +1206,7 @@ def show_Scalar_Function_Main():
         "𝑥: Ասիճան կամ աստիճանի ցուցիչ։\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Scalar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Scalar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
    
 def show_Pointar_Function():
@@ -1201,7 +1230,7 @@ def show_Pointar_Function():
     Pointar_Function_Case_button.place(x=60, y=660)
     Pointar_Function_Use_button = ctk.CTkButton(main_frame, text="Օգտագործումներ", font=('Bold', 20), command=show_Pointar_Function_Use, corner_radius=32)
     Pointar_Function_Use_button.place(x=60, y=730)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Math_11class_1Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_11class_1Term, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Pointar_Function_Use():
@@ -1218,7 +1247,7 @@ def show_Pointar_Function_Use():
         "և ճարտարագիտության մեջ։\n") 
     Pointar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Pointar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Pointar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Pointar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Pointar_Function_Case():
@@ -1231,7 +1260,7 @@ def show_Pointar_Function_Case():
         "𝑛 = 0.5: Քառակուսի արմատ (𝑓(𝑥) = 𝑎√𝑥)։\n") 
     Pointar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Pointar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Pointar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Pointar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Pointar_Function_Diagrame():
@@ -1247,7 +1276,7 @@ def show_Pointar_Function_Diagrame():
         "կամ սեղմվածությունը։\n") 
     Pointar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Pointar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Pointar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Pointar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Pointar_Function_Properties():
@@ -1268,7 +1297,7 @@ def show_Pointar_Function_Properties():
         "կետի նկատմամբ։\n") 
     Pointar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Pointar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Pointar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Pointar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Pointar_Function_Main():
@@ -1282,7 +1311,7 @@ def show_Pointar_Function_Main():
         "\nՀիմնական հատկություններ\n") 
     Pointar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Pointar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Pointar_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Pointar_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function():
@@ -1305,7 +1334,7 @@ def show_Log_Function():
     Log_Function_Use_button.place(x=60, y=620)
     Log_Function_Formula_button = ctk.CTkButton(main_frame, text="Կարևոր բանաձևեր և հատկություններ", font=('Bold', 20), command=show_Log_Function_Formula, corner_radius=32)
     Log_Function_Formula_button.place(x=60, y=690)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Math_11class_1Term, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Math_11class_1Term, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Formula():
@@ -1329,7 +1358,7 @@ def show_Log_Function_Formula():
         "Լուծեք՝ 8 = 𝑥 + 1, այնպես որ 𝑥 = 7") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Use():
@@ -1355,7 +1384,7 @@ def show_Log_Function_Use():
         "բարդությունների հետ։") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Solution():
@@ -1379,7 +1408,7 @@ def show_Log_Function_Solution():
         "Լուծեք՝ 8 = 𝑥 + 1, այնպես որ 𝑥 = 7") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Graph():
@@ -1397,7 +1426,7 @@ def show_Log_Function_Graph():
         "Երբ b > 1, ֆունկցիան դանդաղ բարձրանում է մեծ 𝑥-երի համար։") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Types():
@@ -1423,7 +1452,7 @@ def show_Log_Function_Types():
         "Օրինակ՝ log₂ 8 = 3, որովհետև 2³ = 8") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Properties():
@@ -1447,7 +1476,7 @@ def show_Log_Function_Properties():
     Scalar_Function_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Log_Function_Properties1, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Properties1():
@@ -1471,7 +1500,7 @@ def show_Log_Function_Properties1():
         "հեշտացնելու համար։\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function_Properties, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function_Properties, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Log_Function_Defination():
@@ -1489,7 +1518,7 @@ def show_Log_Function_Defination():
         "Օրինակ՝ log₃ 9 = 2, որովհետև 3² = 9\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Log_Function_Main():
@@ -1508,7 +1537,7 @@ def show_Log_Function_Main():
         "Լոգարիթմական ձևը՝ log₂ 8 = 3, որովհետև 2³ = 8\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Log_Function, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Log_Function, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Input_and_Output_info():
@@ -1523,7 +1552,7 @@ def show_Input_and_Output_info():
     Input_and_Outputn_File_button.place(x=100, y=400)
     Input_and_Outputn_Important_button = ctk.CTkButton(main_frame, text="Կարևոր կետեր՝ հիշելու համար", font=('Bold', 20), command=show_Input_and_Outputn_Important, corner_radius=32)
     Input_and_Outputn_Important_button.place(x=100, y=470)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Beginners, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Beginners, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Input_and_Outputn_Important():
@@ -1547,7 +1576,7 @@ def show_Input_and_Outputn_Important():
         "ֆայլերի անվտանգ մշակումը ապահովելու համար:") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Input_and_Outputn_File():
@@ -1568,7 +1597,7 @@ def show_Input_and_Outputn_File():
         "    print(content)") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Input_and_Outputn_Output():
@@ -1592,7 +1621,7 @@ def show_Input_and_Outputn_Output():
         "print(f\"Իմ անունն է {name}:\")") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Input_and_Outputn_Input():
@@ -1613,7 +1642,7 @@ def show_Input_and_Outputn_Input():
     Scalar_Function.pack(pady=100)
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types_info():
@@ -1650,7 +1679,7 @@ def show_Variables_and_Types1():
         "pi = 3.14      # Ուղիղ թիվ (Float)") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types2():
@@ -1666,7 +1695,7 @@ def show_Variables_and_Types2():
         "բառեր, ինչպիսիք են՝ for, if, while։") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types3():
@@ -1695,7 +1724,7 @@ def show_Variables_and_Types3():
     Scalar_Function_text.place(x=10, y=240)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Variables_and_Types32, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types32():
@@ -1720,7 +1749,7 @@ def show_Variables_and_Types32():
     Scalar_Function_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Variables_and_Types33, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types3, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types3, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types33():
@@ -1739,7 +1768,7 @@ def show_Variables_and_Types33():
         "result = None") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types32, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types32, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types4():
@@ -1755,7 +1784,7 @@ def show_Variables_and_Types4():
         "x = 3.14     # float") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types5():
@@ -1772,7 +1801,7 @@ def show_Variables_and_Types5():
         "print(type(y))  # Արդյունք: <class 'str'>") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 
@@ -1792,7 +1821,7 @@ def show_Variables_and_Types6():
         "print(y, z)     # Արդյունք: 123 123.0\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Variables_and_Types7():
@@ -1810,7 +1839,7 @@ def show_Variables_and_Types7():
         "type() ֆունկցիան։\n") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Conditional_Operators_info():
@@ -1831,7 +1860,7 @@ def show_Conditional_Operators_info():
     Conditional_Operators2_button.place(x=100, y=540)
     Conditional_Operators3_button = ctk.CTkButton(main_frame, text="Օգտագործումը պայմանական արտահայտություններում", font=('Bold', 20), command=show_Conditional_Operators3, corner_radius=32)
     Conditional_Operators3_button.place(x=100, y=610)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Beginners, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Beginners, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Conditional_Operators1():
@@ -1857,7 +1886,7 @@ def show_Conditional_Operators1():
         "5<=3                  False") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Conditional_Operators_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Conditional_Operators_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Conditional_Operators2():
@@ -1883,7 +1912,7 @@ def show_Conditional_Operators2():
         "print(not(x > 5))         # False") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Conditional_Operators_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Conditional_Operators_info, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Conditional_Operators3():
@@ -1903,7 +1932,7 @@ def show_Conditional_Operators3():
         "դեպքեր Python-ում պայմանական օպերատորների վերաբերյալ։\n") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Conditional_Operators_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Conditional_Operators_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String_info():
@@ -1930,7 +1959,7 @@ def show_String_info():
     String6_button.place(x=100, y=650)
     String7_button = ctk.CTkButton(main_frame, text="Տողի հատկությունների ստուգում", font=('Bold', 20), command=show_String7, corner_radius=32)
     String7_button.place(x=100, y=730)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Beginners, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Beginners, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String7():
@@ -1951,7 +1980,7 @@ def show_String7():
         "print(text.isalnum())  # True\n") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String6():
@@ -1969,7 +1998,7 @@ def show_String6():
         "# Աշխարհ\n") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String5():
@@ -1989,7 +2018,7 @@ def show_String5():
         "print(\"Իմ անունն է %s և ես %d տարեկան եմ։\" % (name, age))\n") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String4():
@@ -2013,7 +2042,7 @@ def show_String4():
     Conditional_Operators1_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_String42, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String42():
@@ -2032,7 +2061,7 @@ def show_String42():
     Conditional_Operators1_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_String43, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String4, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String4, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String43():
@@ -2052,7 +2081,7 @@ def show_String43():
     Conditional_Operators1_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_String44, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String42, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String42, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String44():
@@ -2075,7 +2104,7 @@ def show_String44():
         "մի քանի եղանակ.\n") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String43, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String43, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String3():
@@ -2100,7 +2129,7 @@ def show_String3():
         "substring = text[1:4]  # 'yth'") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String2():
@@ -2116,7 +2145,7 @@ def show_String2():
         "բազմատող տեքստ է։'''\n") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_String1():
@@ -2134,7 +2163,7 @@ def show_String1():
         "ստեղծվելուց հետո դրանք չեն կարող փոփոխվել։") 
     Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Lists_info():
@@ -2159,7 +2188,7 @@ def show_Lists_info():
     Lists8_button.place(x=80, y=660)
     Lists9_button = ctk.CTkButton(main_frame, text="Հիմնական հատկություններ", font=('Bold', 20), command=show_List9, corner_radius=32)
     Lists9_button.place(x=80, y=730)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Beginners, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Beginners, corner_radius=32)
     back_button.place(x=780, y=750) 
 
 def show_List9():
@@ -2174,7 +2203,7 @@ def show_List9():
         "matrix = [[1, 2, 3], [4, 5, 6]]\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List8():
@@ -2198,7 +2227,7 @@ def show_List8():
         "copy()\t\tՎերադարձնում է Ցուցակի պատճենը։\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List7():
@@ -2210,7 +2239,7 @@ def show_List7():
         "sub_list = numbers[1:4]  # Տարրերը 1-ից մինչև 3-րդ ինդեքս\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List6():
@@ -2225,7 +2254,7 @@ def show_List6():
         "    print(numbers[i])\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List5():
@@ -2247,7 +2276,7 @@ def show_List5():
         "numbers.clear()\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List4():
@@ -2263,7 +2292,7 @@ def show_List4():
         "print(numbers)  # Արդյունք՝ [10, 25, 30, 40]\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List3():
@@ -2280,7 +2309,7 @@ def show_List3():
         "print(numbers[-1])  # Արդյունք՝ 40\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List1():
@@ -2295,7 +2324,7 @@ def show_List1():
         "Դրանք սահմանվում են քառակուսի փակագծերով՝ []։") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List2():
@@ -2311,7 +2340,7 @@ def show_List2():
         "mixed_list = [1, \"hello\", 3.5, True]\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Loops_info():
@@ -2328,7 +2357,7 @@ def show_Loops_info():
     Loops4_button.place(x=100, y=410)
     Loops5_button = ctk.CTkButton(main_frame, text="Անվերջ ցիկլեր", font=('Bold', 20), command=show_Loops5, corner_radius=32)
     Loops5_button.place(x=100, y=480)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Beginners, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Beginners, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Loops1():
@@ -2354,7 +2383,7 @@ def show_Loops1():
         "    print(նշան)") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Loops2():
@@ -2379,7 +2408,7 @@ def show_Loops2():
         "    enter = input(\"Գրեք 'ելք'՝ դադարեցնելու համար: \")\n") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Loops3():
@@ -2406,7 +2435,7 @@ def show_Loops3():
         "else:print(\"Ցիկլն ավարտվեց!\")#Կկատարվի,եթե break չլինի") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=230)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Loops4():
@@ -2421,7 +2450,7 @@ def show_Loops4():
         "        print(f\"i: {i}, j: {j}\")") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Loops5():
@@ -2436,7 +2465,7 @@ def show_Loops5():
         "    print(\"Անվերջ ցիկլ!\")") 
     List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List_Comprehension_info():
@@ -2460,7 +2489,7 @@ def show_List_Comprehension_info():
     List_Comprehension1_button.place(x=100, y=650)
     List_Comprehension1_button = ctk.CTkButton(main_frame, text="Կարևոր Դետալներ", font=('Bold', 20), command=show_List_Comprehension3, corner_radius=32)
     List_Comprehension1_button.place(x=100, y=720)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List_Comprehension3():
@@ -2484,7 +2513,7 @@ def show_List_Comprehension3():
         "բարելավում ընթեռնելիությունը։") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_List_Comprehension_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_List_Comprehension_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List_Comprehension2():
@@ -2510,7 +2539,7 @@ def show_List_Comprehension2():
     List_Comprihation_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_List_Comprehension22, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_List_Comprehension_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_List_Comprehension_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_List_Comprehension22():
@@ -2533,7 +2562,7 @@ def show_List_Comprehension22():
         "squared_numbers = [square(x) for x in numbers]") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_List_Comprehension2, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_List_Comprehension2, corner_radius=32)
     back_button.place(x=780, y=750)
 
     
@@ -2553,7 +2582,7 @@ def show_List_Comprehension1():
         "միայն որոշակի տարրեր։\n") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_List_Comprehension_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_List_Comprehension_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops_info():
@@ -2568,7 +2597,7 @@ def show_Nested_Loops_info():
     Nested_Loops3_button.place(x=100, y=340)
     Nested_Loops4_button = ctk.CTkButton(main_frame, text="Ներդրված ցիկլերի համար խորհուրդներ", font=('Bold', 20), command=show_Nested_Loops4, corner_radius=32)
     Nested_Loops4_button.place(x=100, y=410)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops4():
@@ -2590,7 +2619,7 @@ def show_Nested_Loops4():
         "որն իրականացվում է, եթե ցիկլը ավարտվում է առանց break-ի:") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Nested_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops3():
@@ -2608,7 +2637,7 @@ def show_Nested_Loops3():
     List_Comprihation_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Nested_Loops32, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Nested_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops32():
@@ -2628,7 +2657,7 @@ def show_Nested_Loops32():
     List_Comprihation_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Nested_Loops33, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops3, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Nested_Loops3, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops33():
@@ -2653,7 +2682,7 @@ def show_Nested_Loops33():
         "...") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops32, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Nested_Loops32, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops2():
@@ -2670,7 +2699,7 @@ def show_Nested_Loops2():
         "Գործողություններ կատարել արժեքների զույգերով:\n") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Nested_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Nested_Loops1():
@@ -2684,7 +2713,7 @@ def show_Nested_Loops1():
         "          յուրաքանչյուր համադրության համար") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Nested_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
     
 def show_Dictionaries_info():
@@ -2709,7 +2738,7 @@ def show_Dictionaries_info():
     Dictionaries3_button.place(x=100, y=640)
     Dictionaries4_button = ctk.CTkButton(main_frame, text="Կազմությունը (Comprehension)", font=('Bold', 20), command=show_Dictionaries4, corner_radius=32)
     Dictionaries4_button.place(x=100, y=720)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Dictionaries4():
@@ -2725,7 +2754,7 @@ def show_Dictionaries4():
         "բացատրություններ, խնդրում եմ, տեղեկացրեք ինձ:")
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Dictionaries_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Dictionaries3():
@@ -2751,7 +2780,7 @@ def show_Dictionaries3():
     List_Comprihation_text.place(x=10, y=200)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Dictionaries32, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Dictionaries_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Dictionaries32():
@@ -2776,7 +2805,7 @@ def show_Dictionaries32():
     List_Comprihation_text.place(x=10, y=200)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Dictionaries33, corner_radius=32)
     next_button.place(x=640, y=750)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries3, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Dictionaries3, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Dictionaries33():
@@ -2802,7 +2831,7 @@ def show_Dictionaries33():
         "my_dict.update({'age': 26, 'country': 'France'})") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=200)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries32, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Dictionaries32, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Dictionaries2():
@@ -2818,7 +2847,7 @@ def show_Dictionaries2():
         "}\n") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Dictionaries_info, corner_radius=32)
     back_button.place(x=780, y=750)    
 
 def show_Dictionaries1():
@@ -2842,7 +2871,7 @@ def show_Dictionaries1():
         "բանալի Dictionary-ում պետք է լինի եզակի։") 
     List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
     List_Comprihation_text.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries_info, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Dictionaries_info, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Functions_info():
@@ -2863,7 +2892,7 @@ def show_Functions_info():
     ''')
     Functions_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Functions_label.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Recursion_info():
@@ -2889,7 +2918,7 @@ def show_Recursion_info():
     ''')
     Recursion_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Recursion_label.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Tuples_and_Sets_info():
@@ -2918,7 +2947,7 @@ def show_Tuples_and_Sets_info():
     ''')
     Tuples_and_Sets_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Tuples_and_Sets_label.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 def show_Lambda_Functions_info():
@@ -2935,7 +2964,7 @@ def show_Lambda_Functions_info():
     ''')
     Lambda_Functions_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Lambda_Functions_label.place(x=10, y=250)
-    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
+    back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), image = ctk.CTkImage(return_image),  command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
 
@@ -2947,7 +2976,7 @@ options_frame.pack(side="left", fill="y")
 
 home_btn = ctk.CTkButton(
     options_frame, text="Home", font=("Arial Bold", 20), text_color="#158aff",
-    fg_color="#c3c3c3", hover_color="#a3a3a3", command=lambda: indicate(home_indicate, home_page)
+    fg_color="#c3c3c3", hover_color="#a3a3a3", image = ctk.CTkImage(list_image) , command=lambda: indicate(home_indicate, home_page)
 )
 home_btn.place(x=10, y=50)
 
@@ -2956,7 +2985,7 @@ home_indicate.place(x=3, y=50)
 
 info_btn = ctk.CTkButton(
     options_frame, text="Info", font=("Arial Bold", 20), text_color="#158aff",
-    fg_color="#c3c3c3", hover_color="#a3a3a3", command=lambda: indicate(info_indicate, info_page)
+    fg_color="#c3c3c3", hover_color="#a3a3a3", image = ctk.CTkImage(info_image), command=lambda: indicate(info_indicate, info_page)
 )
 info_btn.place(x=10, y=100)
 
@@ -2966,7 +2995,7 @@ info_indicate.place(x=3, y=100)
 
 set_btn = ctk.CTkButton(
     options_frame, text="Settings", font=("Arial Bold", 20), text_color="#158aff",
-    fg_color="#c3c3c3", hover_color="#a3a3a3", command=lambda: indicate(set_indicate, set_page)
+    fg_color="#c3c3c3", hover_color="#a3a3a3", image=ctk.CTkImage(set_image), command=lambda: indicate(set_indicate, set_page)
 )
 set_btn.place(x=10, y=150)
 
