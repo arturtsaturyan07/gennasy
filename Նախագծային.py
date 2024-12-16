@@ -95,7 +95,7 @@ def set_page():
     
     lb = ctk.CTkLabel(
         set_frame,
-        text="Setings",
+        text="Կարգավորումներ",
         font=("Bold", 35),
         text_color="black"
     )
@@ -342,35 +342,16 @@ def show_calculator_info():
         equation = result
         label_result.configure(text=equation)
 
-    def log_function():
+    def root_function():
         nonlocal equation
         try:
             value = float(equation)
             if value <= 0: 
-                raise ValueError("Log undefined for non-positive values")
-            result = str(math.log(value))  
+                raise ValueError("Root undefined for non-positive values")
+            result = str(math.sqrt(value))  
             equation = result
         except:
             equation = "Error"
-        label_result.configure(text=equation)
-
-    def log_base_function():
-        nonlocal equation
-        try:
-            if ',' in equation:
-                base, number = equation.split(",")
-                base = float(base)
-                number = float(number)
-                if base <= 0 or base == 1 or number <= 0:
-                    raise ValueError("Invalid input values")
-                result = str(math.log(number, base))
-            else:
-                equation = "Error"
-                result = "Error"
-        except:
-            result = "Error"
-       
-        equation = result
         label_result.configure(text=equation)
 
     def power_function():
@@ -421,8 +402,8 @@ def show_calculator_info():
         ("4", lambda: show("4"), 10, 300), ("5", lambda: show("5"), 110, 300), ("6", lambda: show("6"), 210, 300), ("+", lambda: show("+"), 310, 430),
         ("1", lambda: show("1"), 10, 365), ("2", lambda: show("2"), 110, 365), ("3", lambda: show("3"), 210, 365), ("0", lambda: show("0"), 10, 430),
         (".", lambda: show("."), 110, 430), ("=", calculate, 210, 430), ("x^y", lambda: show("^"), 310, 170),  
-        ("log", log_function, 210, 105),  
-        ("log(base)", lambda: show(","), 310, 105),  
+        ("√", root_function, 210, 105),  
+        ("π", lambda: show(str(math.pi)), 310, 105),  
         ("sin", sin_function, 10, 170),  
         ("cos", cos_function, 110, 170),  
         ("tan", tan_function, 210, 170),
@@ -739,7 +720,7 @@ def show_Element_of_Trigonometry_Graph():
     Element_of_Trigonometry.pack(pady=100)
     text_content = (
         "\n       Եռանկյունաչափական ֆունկցիաները պարբերական\n"
-        "հատկություն ունեն։ Օրինակ:\n"
+        "հատկություն ունեն։ Օրինակ՝\n"
         "Սինուս և կոսինուս ֆունկցիաները ունեն հիմնական\n"
         "պարբերություն 2π:\n"
         "Տանգենտ և կոտանգենտ ֆունկցիաները ունեն հիմնական\n"
@@ -1343,7 +1324,7 @@ def show_Log_Function_Formula():
         "համախմբելու կամ բաժանելու համար։\n"
         "Լոգարիթմը մեկուսացնելը: Լոգարիթմային արտահայտությունը\n"
         "մեկուսացնելը թույլ է տալիս այն փոփոխել էքսպոնենցիալ ձևով։\n"
-        "Օրինակ: Լուծեք log₂ (𝑥+1) = 3։\n"
+        "Օրինակ՝ Լուծեք log₂ (𝑥+1) = 3։\n"
         "Փոխարինեք էքսպոնենցիալ ձևով՝ 2³ = 𝑥 + 1\n"
         "Լուծեք՝ 8 = 𝑥 + 1, այնպես որ 𝑥 = 7") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
@@ -1393,7 +1374,7 @@ def show_Log_Function_Solution():
         "համախմբելու կամ բաժանելու համար։\n"
         "Լոգարիթմը մեկուսացնելը: Լոգարիթմային արտահայտությունը\n"
         "մեկուսացնելը թույլ է տալիս այն փոփոխել էքսպոնենցիալ ձևով։\n"
-        "Օրինակ: Լուծեք log₂ (𝑥+1) = 3։\n"
+        "Օրինակ՝ Լուծեք log₂ (𝑥+1) = 3։\n"
         "Փոխարինեք էքսպոնենցիալ ձևով՝ 2³ = 𝑥 + 1\n"
         "Լուծեք՝ 8 = 𝑥 + 1, այնպես որ 𝑥 = 7") 
     Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
@@ -1577,7 +1558,7 @@ def show_Input_and_Outputn_File():
         "\n       Python-ը կարող է ֆայլերի հետ աշխատել՝\n"
         "օգտագործելով ներկառուցված ֆունկցիաներ, ինչպիսիք\n"
         "են open(), read() և write():\n\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "# Գրառում ֆայլի մեջ\n"
         "with open(\"orinak.txt\", \"w\") as file:\n"
         "    file.write(\"Բարև, Ֆայլ!\\n\")\n\n"
@@ -1585,7 +1566,7 @@ def show_Input_and_Outputn_File():
         "with open(\"orinak.txt\", \"r\") as file:\n"
         "    content = file.read()\n"
         "    print(content)") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1599,7 +1580,7 @@ def show_Input_and_Outputn_Output():
         "print() ֆունկցիան: Այն կարող է ցուցադրել տեքստ,\n"
         "փոփոխականներ և նույնիսկ "
         "ձևավորված տողեր:\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "# Պարզ ելք\n"
         "print(\"Բարև, Աշխարհ!\")\n"
         "# Ելք փոփոխականներով\n"
@@ -1609,7 +1590,7 @@ def show_Input_and_Outputn_Output():
         "# Ձևավորված ելք (f-string)\n"
         "name = \"Անահիտ\"\n"
         "print(f\"Իմ անունն է {name}:\")") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1617,19 +1598,20 @@ def show_Input_and_Outputn_Output():
 def show_Input_and_Outputn_Input():
     delate_pages()
     Scalar_Function = ctk.CTkLabel(main_frame, text="Մուտք Python-ում", font=('Bold', 35), text_color='black')
-    Scalar_Function.pack(pady=100)
     text_content = (
-        "\n       Python-ը օգտագործում է input() ֆունկցիան՝\n"
-        "օգտատիրոջից մուտքագրում ստանալու համար:\n"
-        "Լռելյայն input()-ը վերադարձնում է տվյալները որպես\n"
-        "տեքստ (string): Անհրաժեշտության դեպքում այն կարող եք\n"
-        "փոխակերպել այլ տիպերի, օրինակ՝ ամբողջ թվերի\n"
-        "կամ իրական թվերի:\n"
-        "Օրինակ:\n"
-        "name = input(\"Մուտքագրեք ձեր անունը: \")\n"
-        "age = int(input(\"Մուտքագրեք ձեր տարիքը: \"))\n"
-        "print(f\"Բարև, {name}! Դուք {age} տարեկան եք:\")\n") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    '''Python-ը օգտագործում է input() ֆունկցիան՝ 
+    օգտատիրոջից մուտքագրում ստանալու համար:
+    Լռելյայն input()-ը վերադարձնում է տվյալները որպես
+    տեքստ (string): Անհրաժեշտության դեպքում այն կարող եք
+    փոխակերպել այլ տիպերի, օրինակ՝ ամբողջ թվերի
+    կամ իրական թվերի:
+    Օրինակ`
+    name = input(\"Մուտքագրեք ձեր անունը: \")
+    age = int(input(\"Մուտքագրեք ձեր տարիքը: \"))
+    print(f\"Բարև, {name}! Դուք {age} տարեկան եք:\")'''
+    ) 
+    Scalar_Function.pack(pady=100)
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Input_and_Output_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1662,11 +1644,11 @@ def show_Variables_and_Types1():
     text_content = (
         "\n       Փոփոխականները ստեղծվում են =\n"
         "օպերատորի միջոցով արժեք վերագրելով։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "x = 10         # Ամբողջ թիվ (Integer)\n"
         "name = \"Անահիտ\" # Տող (String)\n"
         "pi = 3.14      # Ուղիղ թիվ (Float)") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1698,18 +1680,18 @@ def show_Variables_and_Types3():
         "int: Ամբողջ թվեր (օր. 5, -10)\n"
         "float: Ուղիղ թվեր (օր. 3.14, -2.5)\n"
         "complex: Կոմպլեքս թվեր (օր. 3 + 4j)\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "a = 5        # int\n"
         "b = 2.5      # float\n"
         "c = 1 + 2j   # complex\n"
         "բ. Տողային Տիպ\n"
         "str: Նիշերի հաջորդականություն՝ փակված\n"
         "մենակ կամ կրկնակի չակերտների մեջ։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "message = \"Բարև, Աշխարհ!\"  # Տող\n"
         "multiline = '''Սա\n"
         "բազմատող տեքստ է։'''") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=240)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Variables_and_Types32, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -1723,7 +1705,7 @@ def show_Variables_and_Types32():
     text_content = (
         "       գ. Բուլյան Տիպ\n"
         "bool: Ներկայացնում է True կամ False արժեք։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "is_active = True\n"
         "is_done = False\n"
         "դ. Հաջորդականության Տիպեր\n"
@@ -1731,10 +1713,10 @@ def show_Variables_and_Types32():
         "(օր. [1, 2, 3])։\n"
         "tuple: Կարգավորված, անփոփոխ հավաքածու\n"
         "(օր. (1, 2, 3))։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "numbers = [1, 2, 3]       # list\n"
         "coordinates = (4, 5)      # tuple\n") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Variables_and_Types33, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -1749,13 +1731,13 @@ def show_Variables_and_Types33():
         "       ե. Հատուցման Տիպ\n"
         "dict: Բանալի-արժեք զույգերի հավաքածու\n"
         "(օր. {\"name\": \"Անահիտ\", \"age\": 25})։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "person = {\"name\": \"Անահիտ\", \"age\": 25}\n"
         "զ. None Տիպ\n"
         "None: Ներկայացնում է արժեքի բացակայությունը։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "result = None") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types32, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1767,11 +1749,11 @@ def show_Variables_and_Types4():
     text_content = (
         "\n       Python-ում փոփոխականները կարող են\n"
         "փոխել իրենց տիպը կոդի կատարման ընթացքում։\n\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "x = 10       # int\n"
         "x = \"Բարև\"  # str\n"
         "x = 3.14     # float") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1783,12 +1765,12 @@ def show_Variables_and_Types5():
     text_content = (
         "\n       Տվյալ փոփոխականի տիպը կարող եք ստուգել\n"
         "type() ֆունկցիայի միջոցով։\n\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "x = 42\n"
         "print(type(x))  # Արդյունք: <class 'int'>\n\n"
         "y = \"Python\"\n"
         "print(type(y))  # Արդյունք: <class 'str'>") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1803,12 +1785,12 @@ def show_Variables_and_Types6():
         "Կարող եք փոխակերպել տիպերը ներկառուցված\n"
         "ֆունկցիաների միջոցով, ինչպիսիք են՝\n"
         "int(), float(), str()։\n\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "x = \"123\"       # str\n"
         "y = int(x)      # Փոխակերպում է int\n"
         "z = float(y)    # Փոխակերպում է float\n"
         "print(y, z)     # Արդյունք: 123 123.0\n") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1826,7 +1808,7 @@ def show_Variables_and_Types7():
         "համար՝ կոդն ավելի ընթեռնելի դարձնելու համար։\n"
         "Տեսակի վերաբերյալ կասկածների դեպքում օգտագործեք\n"
         "type() ֆունկցիան։\n") 
-    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Scalar_Function_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Scalar_Function_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Variables_and_Types_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1841,7 +1823,7 @@ def show_Conditional_Operators_info():
         "օգտագործվում են երկու արժեք համեմատելու համար։\n"
         "Պայմանական օպերատորի արդյունքը Boolean տիպի արժեք է՝\n"
         "`True`(ճշմարիտ) կամ `False` (կեղծ)։\n")
-    Conditional_Operators_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators_text.place(x=10, y=250)
     Conditional_Operators1_button = ctk.CTkButton(main_frame, text="Հիմնական պայմանական օպերատորները", font=('Bold', 20), command=show_Conditional_Operators1, corner_radius=32)
     Conditional_Operators1_button.place(x=100, y=470)
@@ -1866,14 +1848,14 @@ def show_Conditional_Operators1():
         "   <                     Ավելի փոքր\n"
         "   >=                   Ավելի մեծ կամ հավասար \n"
         "   <=                   Ավելի փոքր կամ հավասար\n"
-        "Օրինակ        Արդյունք\n"
+        "Օրինակ՝        Արդյունք՝\n"
         "5==5                  True\n"
         "5!=3                   True\n"
         "5>3                    True\n"
         "5<3                    False\n"
         "5>=5                  True\n"
         "5<=3                  False") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Conditional_Operators_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1890,7 +1872,7 @@ def show_Conditional_Operators2():
         "or: Վերադարձնում է `True`,\n"
         "եթե գոնե մեկ պայմանն է ճշմարիտ։\n"
         "not: Հակադարձում է պայմանը։\n"
-        "Օրինակ.\n"
+        "Օրինակ՝\n"
         "x = 10\n"
         "y = 20\n"
         "# Օգտագործելով 'and'\n"
@@ -1899,7 +1881,7 @@ def show_Conditional_Operators2():
         "print(x < 5 or y > 15)    # True\n"
         "# Օգտագործելով 'not'\n"
         "print(not(x > 5))         # False") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Conditional_Operators_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1911,7 +1893,7 @@ def show_Conditional_Operators3():
     text_content = (
         "       Պայմանական օպերատորները հաճախ օգտագործվում\n"
         "են if, elif և else արտահայտություններում:\n"
-        "Օրինակ.\n"
+        "Օրինակ՝\n"
         "age = 18\n"
         "if age >= 18:\n"
         "    print(\"Դուք չափահաս եք։\")\n"
@@ -1919,7 +1901,7 @@ def show_Conditional_Operators3():
         "    print(\"Դուք անչափահաս եք։\")\n\n"
         "Ցանկանու՞մ եք ավելի մանրամասն օրինակներ կամ հատուկ\n"
         "դեպքեր Python-ում պայմանական օպերատորների վերաբերյալ։\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Conditional_Operators_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1932,7 +1914,7 @@ def show_String_info():
         "       Python-ում տողերը (String) հիմնական տվյալների\n"
         "տեսակ են, որոնք օգտագործվում են տեքստ ներկայացնելու և\n"
         "մշակելու համար։")
-    String_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    String_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     String_text.place(x=10, y=180)
     String1_button = ctk.CTkButton(main_frame, text="Ի՞նչ է տողը", font=('Bold', 20), command=show_String1, corner_radius=32)
     String1_button.place(x=100, y=300)
@@ -1967,7 +1949,7 @@ def show_String7():
         "text = \"Hello123\"\n"
         "print(text.isalpha())  # False\n"
         "print(text.isalnum())  # True\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -1985,7 +1967,7 @@ def show_String6():
         "print(\"Բարև\\nԱշխարհ\")  # Արդյունքը՝\n"
         "# Բարև\n"
         "# Աշխարհ\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2005,7 +1987,7 @@ def show_String5():
         "print(\"Իմ անունն է {} և ես {} տարեկան եմ։\".format(name, age))\n"
         "3. % Օպերատոր (Հին ձևաչափ)\n"
         "print(\"Իմ անունն է %s և ես %d տարեկան եմ։\" % (name, age))\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2027,7 +2009,7 @@ def show_String4():
         "print(text.upper())    # 'ԲԱՐԵՎ ԱՇԽԱՐՀ'\n"
         "print(text.capitalize())  # 'Բարև աշխարհ'\n"
         "print(text.title())    # 'Բարև Աշխարհ'\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_String42, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2046,7 +2028,7 @@ def show_String42():
         "rstrip(): Հեռացնում է միայն վերջից։\n"
         "text = \"   Բարև Աշխարհ   \"\n"
         "print(text.strip())   # 'Բարև Աշխարհ'") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_String43, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2066,7 +2048,7 @@ def show_String43():
         "print(text.find(\"զվարճալի\"))  # 7\n"
         "print(text.replace(\"զվարճալի\", \"հրաշալի\")) \n"
         "# 'Python-ը հրաշալի է'\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_String44, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2091,7 +2073,7 @@ def show_String44():
         "Տողի ձևաչափում\n"
         "Python-ը տրամադրում է տողերի ձևաչափման\n"
         "մի քանի եղանակ.\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String43, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2116,7 +2098,7 @@ def show_String3():
         "Տողի մասերի ստացումը կատարվում է կտրման միջոցով։\n"
         "text = \"Python\"\n"
         "substring = text[1:4]  # 'yth'") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2132,7 +2114,7 @@ def show_String2():
         "Բազմատող տեքստ\n"
         "multi_line = '''Սա\n"
         "բազմատող տեքստ է։'''\n") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2150,7 +2132,7 @@ def show_String1():
         "տեքստերի համար)՝ '''hello''' կամ \"\"\"hello\"\"\"\n"
         "Տողերը անփոփոխելի են (immutable), այսինքն՝\n"
         "ստեղծվելուց հետո դրանք չեն կարող փոփոխվել։") 
-    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    Conditional_Operators1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     Conditional_Operators1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_String_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2190,7 +2172,7 @@ def show_List9():
         "Նույնական Ցուցակներ (Nested Lists)․ Ցուցակները\n"
         "կարող են պարունակել այլ Ցուցակներ։\n"
         "matrix = [[1, 2, 3], [4, 5, 6]]\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2214,7 +2196,7 @@ def show_List8():
         "sort()\t\tԴասավորում է Ցուցակը աճման կարգով։\n"
         "reverse()\t\tՓոխում է Ցուցակի հերթականությունը։\n"
         "copy()\t\tՎերադարձնում է Ցուցակի պատճենը։\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2226,7 +2208,7 @@ def show_List7():
     text_content = (
         "\n       Ցուցակի որոշակի հատված ստանալու համար։\n"
         "sub_list = numbers[1:4]  # Տարրերը 1-ից մինչև 3-րդ ինդեքս\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2241,7 +2223,7 @@ def show_List6():
         "# Օգտագործելով ինդեքս\n"
         "for i in range(len(numbers)):\n"
         "    print(numbers[i])\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2263,7 +2245,7 @@ def show_List5():
         "last_element = numbers.pop()\n"
         "Մաքրել (Clear)․ Հեռացնում է բոլոր տարրերը։\n"
         "numbers.clear()\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2279,7 +2261,7 @@ def show_List4():
         "print(numbers)  # Արդյունք՝ [10, 20, 30, 40]\n"
         "numbers[1] = 25\n"
         "print(numbers)  # Արդյունք՝ [10, 25, 30, 40]\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2296,7 +2278,7 @@ def show_List3():
         "numbers = [10, 20, 30, 40]\n"
         "print(numbers[0])  # Արդյունք՝ 10\n"
         "print(numbers[-1])  # Արդյունք՝ 40\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2311,7 +2293,7 @@ def show_List1():
         "ունի կարգավորված և փոփոխվող (mutable) կառուցվածք։\n"
         "Ցուցակները թույլ են տալիս կրկնվող տարրեր։\n"
         "Դրանք սահմանվում են քառակուսի փակագծերով՝ []։") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2327,7 +2309,7 @@ def show_List2():
         "numbers = [1, 2, 3, 4, 5]\n\n"
         "# Տարբեր տիպի տվյալներով Ցուցակ\n"
         "mixed_list = [1, \"hello\", 3.5, True]\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Lists_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2359,7 +2341,7 @@ def show_Loops1():
         "Կառուցվածքը:\n"
         "for փոփոխական իտրերիում:\n"
         "    # Կոդի բլոկ\n"
-        "Օրինակներ:\n"
+        "Օրինակներ՝\n"
         "Ցուցակի միջոցով անցնելիս:\n"
         "պտուղներ = [\"խնձոր\", \"բանան\", \"բալ\"]\n"
         "for պտուղ in պտուղներ:\n"
@@ -2370,7 +2352,7 @@ def show_Loops1():
         "Տողի միջոցով անցնելիս:\n"
         "for նշան in \"բարև\":\n"
         "    print(նշան)") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2385,7 +2367,7 @@ def show_Loops2():
         "Կառուցվածքը:\n"
         "while պայման:\n"
         "    # Կոդի բլոկ\n"
-        "Օրինակներ:\n"
+        "Օրինակներ՝\n"
         "Հաշվիչի օգտագործմամբ:\n"
         "sum = 0\n"
         "while հաշվիչ < 5:\n"
@@ -2395,7 +2377,7 @@ def show_Loops2():
         "enter = \"\"\n"
         "while մուտք != \"ելք\":\n"
         "    enter = input(\"Գրեք 'ելք'՝ դադարեցնելու համար: \")\n") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2422,7 +2404,7 @@ def show_Loops3():
         "երբ ցիկլը ավարտվում է բնականոն ձևով։\n"
         "for i in range(5):print(i)\n"
         "else:print(\"Ցիկլն ավարտվեց!\")#Կկատարվի,եթե break չլինի") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=230)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2433,11 +2415,11 @@ def show_Loops4():
     List1.pack(pady=100)
     text_content = (
         "       Ցիկլ կարելի է տեղադրել մեկ այլ ցիկլի մեջ։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "for i in range(3):\n"
         "    for j in range(2):\n"
         "        print(f\"i: {i}, j: {j}\")") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2449,10 +2431,10 @@ def show_Loops5():
     text_content = (
         "       while ցիկլերը կարող են դառնալ անվերջ,\n"
         "եթե պայմանը միշտ True է մնում։\n"
-        "Օրինակ:\n"
+        "Օրինակ՝\n"
         "while True:\n"
         "    print(\"Անվերջ ցիկլ!\")") 
-    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List1_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List1_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2500,7 +2482,7 @@ def show_List_Comprehension3():
         "արդյունավետ կոդ գրելու համար։ Օգտագործեք այն, երբ այն\n"
         "պարզեցնում է ձեր տրամաբանությունը և\n"
         "բարելավում ընթեռնելիությունը։") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_List_Comprehension_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2524,7 +2506,7 @@ def show_List_Comprehension2():
         "uppercase_words = [word.upper() for word in words]\n"
         "print(uppercase_words)  # Արդյունք:\n"
         "['HELLO', 'WORLD', 'PYTHON']") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_List_Comprehension22, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2540,8 +2522,8 @@ def show_List_Comprehension22():
         "Ստեղծեք երկու ցուցակների տարրերի\n"
         "բոլոր համակցությունների ցուցակ՝\n"
         "combinations = [(x, y) for x in [1, 2]\n"
-        "for y in ['a', 'b']]\n"
-        "print(combinations)  # Արդյունք:\n"
+        "for y in ['a', 'b']]:\n"
+        "   print(combinations)  # Արդյունք:\n"
         "[(1, 'a'), (1, 'b'), (2, 'a'), (2, 'b')]\n"
         "Ֆունկցիայի Կոչում\n"
         "Կիրառեք ֆունկցիա ցուցակի յուրաքանչյուր տարրի վրա՝\n"
@@ -2549,7 +2531,7 @@ def show_List_Comprehension22():
         "    return n**2\n"
         "numbers = [1, 2, 3, 4]\n"
         "squared_numbers = [square(x) for x in numbers]") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_List_Comprehension2, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2622,7 +2604,7 @@ def show_Nested_Loops3():
         "    for element in row:\n"
         "        print(element, end=' ')\n"
         "Արդյունք: 1 2 3 4 5 6 7 8 9\n") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Nested_Loops32, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2642,7 +2624,7 @@ def show_Nested_Loops32():
         "    for char in list2:\n"
         "        print(f\"{num}{char}\", end=' ')\n"
         "Արդյունք: 1A 1B 1C 2A 2B 2C 3A 3B 3C\n") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Nested_Loops33, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2669,7 +2651,7 @@ def show_Nested_Loops33():
         "i=1, j=2\n"
         "i=1, j=3\n"
         "...") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops32, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2700,7 +2682,7 @@ def show_Nested_Loops1():
         "    for inner_variable in inner_iterable:\n"
         "        # Կոդի բլոկ, որը կատարվում է\n"
         "          յուրաքանչյուր համադրության համար") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Nested_Loops_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2741,7 +2723,7 @@ def show_Dictionaries4():
         "# Արդյունք՝ {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}\n"
         "Եթե ցանկանում եք ավելի մանրամասն օրինակներ կամ\n"
         "բացատրություններ, խնդրում եմ, տեղեկացրեք ինձ:")
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries_info, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2765,7 +2747,7 @@ def show_Dictionaries3():
         "del կարելի է օգտագործել՝ բանալիով ջնջելու համար։\n"
         "del my_dict['city']\n"
         "# Ջնջում ենք 'city' բանալի-գործողություն զույգը") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=200)
     next_button = ctk.CTkButton(main_frame, text="Հաջորդ էջ", font=('Bold', 15), command=show_Dictionaries32, corner_radius=32)
     next_button.place(x=640, y=750)
@@ -2818,7 +2800,7 @@ def show_Dictionaries33():
         "print(my_dict.get('age'))  # Արդյունք՝ 25\n"
         "# Թարմացնում ենք **Dictionary**-ը\n"
         "my_dict.update({'age': 26, 'country': 'France'})") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=200)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries32, corner_radius=32)
     back_button.place(x=780, y=750)
@@ -2834,7 +2816,7 @@ def show_Dictionaries2():
         "    'age': 30,\n"
         "    'city': 'New York'\n"
         "}\n") 
-    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black')
+    List_Comprihation_text = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
     List_Comprihation_text.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Dictionaries_info, corner_radius=32)
     back_button.place(x=780, y=750)    
@@ -2867,6 +2849,20 @@ def show_Functions_info():
     delate_pages()
     Functions_label = ctk.CTkLabel(main_frame, text="Ֆունկցիաներ", font=('Bold', 35), text_color='black')
     Functions_label.pack(pady=100)
+    text_content = ('''Python-ի ֆունկցիաները հատուկ կառուցվածքներ են, որոնք թույլ են տալիս կրկնվող
+                     գործողությունները մեկ անգամ գրել և օգտագործել բազմիցս։
+    Սինտաքս՝ 
+    def function_name(parameters):
+        # մարմին
+        return result
+    Օրինակ՝
+    def greet(name="Guest"):
+        print(f"Hello, {name}!")
+
+    greet()  # Արդյունքը՝ Hello, Guest!
+    ''')
+    Functions_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
+    Functions_label.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
@@ -2874,6 +2870,25 @@ def show_Recursion_info():
     delate_pages()
     Recursion_label = ctk.CTkLabel(main_frame, text="Ռեկուրսիա", font=('Bold', 35), text_color='black')
     Recursion_label.pack(pady=100)
+    text_content = ('''Ռեկուրսիան այն երևույթն է, երբ ֆունկցիան իր կատարման ընթացքում կանչում է ինքն իրեն: 
+                    Միգուցե թվա, թե այսպիսի գործողությունը կարող է անվերջ ցիկլ ստեղծել, բայց եթե ճիշտ 
+                    իրականացնենք մեր ֆունկցիան, այն, ի վերջո, կհասնի մի կետի, որից հետո այլևս ինքն իրեն 
+                    չի կանչի: Ռեկուրսիվ եղանակով խնդիրներ լուծելիս մենք սովորաբար ստեղծում ենք մի ֆունկցիա, 
+                    որն ինչ-որ պահ ինքն իրեն կանչում է: Այն մասը, երբ ֆունկցիան կանչում է ինքն իրեն, անվանում 
+                    ենք «ռեկուրսիվ քայլ»: 
+    Օրինակ՝
+    def sum(n)։
+        print(f'sum({n})', end=' -> ')
+        if n == 0:
+            return 0
+        return n + sum(n - 1)  
+
+    print(sum(2))          # sum(2) -> sum(1) -> sum(0) -> 3
+    print(sum(3))          # sum(3) -> sum(2) -> sum(1) -> sum(0) -> 6
+    print(sum(4))          # sum(4) -> sum(3) -> sum(2) -> sum(1) -> sum(0) -> 10
+    ''')
+    Recursion_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
+    Recursion_label.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
@@ -2881,6 +2896,28 @@ def show_Tuples_and_Sets_info():
     delate_pages()
     Tuples_and_Sets_label = ctk.CTkLabel(main_frame, text="Tuple-ներ և Set-եր", font=('Bold', 35), text_color='black')
     Tuples_and_Sets_label.pack(pady=100)
+    text_content = ('''Զանգվածները հնարավոր է փոփոխել. մենք կարող ենք փոխել դրանց տարրերը, օրինակ` 1[1] = 100-ով: 
+                    Սակայն Python-ում կա նաև tuple, որը երաշխավորում է, որ առանձին տարրեր փոփոխության չեն ենթարկվելու: 
+    Օրինակ ՝
+    box = (20, 30, 50)
+    box[0] = 10         # TypeError: 'tuple' object does not support item assignment
+    box = (10, 30, 50)  # OK
+    box = 10, 30, 50    # OK
+                    
+    set -ը չկարգավորված տարրերի հավաքածու է, որտեղ կրկնվող տարրեր չկան: Այն ցույց է տալիս տարրերի առկայությունը 
+    և չունի հատուկ կարգ կամ հերթականություն:
+    Օրինակ՝
+    cities = ['San Francisco', 'New York', 'Yerevan', 'New York', 'Tel Aviv', 
+					'San Diego', 'San Francisco', 'Yerevan']
+    uniques = set(cities)
+    print(uniques)
+    # {'San Diego', 'Yerevan', 'San Francisco', 'New York', 'Tel Aviv'}
+
+    print(len(cities))     # 8
+    print(len(uniques))    # 5
+    ''')
+    Tuples_and_Sets_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
+    Tuples_and_Sets_label.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
@@ -2888,6 +2925,16 @@ def show_Lambda_Functions_info():
     delate_pages()
     Lambda_Functions_label = ctk.CTkLabel(main_frame, text="Լամբդա ֆունկցիաներ", font=('Bold', 35), text_color='black')
     Lambda_Functions_label.pack(pady=100)
+    text_content = ('''Lambda ֆունկցիաները (անանուն ֆունկցիաներ) օգտագործվում են մեկ տողով պարզ գործողություն 
+                    կատարելու համար: Ստորև բերված են նույն արդյունքին հասնելու երկու եղանակ` մեկը սովորական 
+                    ֆունկցիայով, իսկ երկրորդը` lambda ֆունկցիայով: 
+    Օրինակ՝
+    add = lambda x, y: x + y
+    print(add(2, 5))  # 7
+    print(add(1, 4))  # 5
+    ''')
+    Lambda_Functions_label = ctk.CTkLabel(main_frame, text=text_content, font=('Bold', 20), text_color='black', justify='left')
+    Lambda_Functions_label.place(x=10, y=250)
     back_button = ctk.CTkButton(main_frame, text="Հետ", font=('Bold', 15), command=show_Python_Concepts_for_Mid_Level, corner_radius=32)
     back_button.place(x=780, y=750)
 
