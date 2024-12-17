@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 from tkinter import messagebox
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 ctk.set_appearance_mode('light') 
 ctk.set_default_color_theme("blue")  
@@ -92,13 +93,39 @@ def info_page():
     info_frame = ctk.CTkFrame(main_frame, fg_color="transparent")
     info_frame.pack(pady=20)
     
+    text_content = '''
+    Բարի գալուստ Gennasy!
+    Այս հավելվածը հատուկ ստեղծվել և մշակվել է դպրոցականների կողմից 
+    դժվարացող դպրոցականներին Հանրահաշիվ և Python ծրագրավորման լեզու 
+    առարկաներում օգնելու նպատակով։ Այստեղ դուք կարող եք գտնել հակիրճ 
+    տեղեկություն Հանրահաշիվ և Python ծրագրավորման լեզու առարկաների
+    ավագ դպրոցում ուսումնասիրվող բոլոր թեմաների տեսականները՝ իրենց 
+    օրինակներով։ Նաև հնարավորություն կա գրաֆիկներ կառուցելու, որը 
+    զգալիորեն կնպաստի այդ առարկաների թեմաների ավելի լավ ամրապնդմանը 
+    և ընկալմանը, քանի որ կարող եք օգտագործել այն գործնականում։ 
+    Ինչպես նաև հասանելի և ներդրված հաշվիչ, որը կօգնի ավելի արագ և 
+    ճշգրիտ հաշվարկներ կատարել՝ թեման ուսումնասիրման և խնդիրների 
+    լուծման ժամանակ։ Հուսանք, մեր ծրագիրը կօգնի ձեզ նոր հաջողություններ գրանցել!
+    '''
+    
     lb = ctk.CTkLabel(
         info_frame,
         text="Տեղեկություն",
         font=("Bold", 35),
         text_color="black"
     )
-    lb.pack(pady=100)
+    lb.pack(pady=20)
+    
+    introduction = ctk.CTkLabel(
+        info_frame, 
+        text=text_content, 
+        font=('Arial', 18), 
+        text_color='black', 
+        justify='left', 
+        wraplength=800
+    )
+    introduction.pack(pady=10)
+
 
 def set_page():
     delate_pages()
@@ -113,7 +140,7 @@ def set_page():
     )
     lb.pack(pady=100)
 
-    
+
 
     def switcher():
         if switch_var.get() == "on":
@@ -140,6 +167,8 @@ def show_graph_info():
 
     def btn_delete():
         name_func.delete(0, 'end')
+        frameing.destroy()
+        
     
     def btn_click():
         expression = name_func.get() 
@@ -147,21 +176,34 @@ def show_graph_info():
             return messagebox.showerror("Error", "Please enter a function.")
         
         try:
+            global frameing
             x = np.linspace(-10, 10, 400)  
             y = eval(expression, {"x": x, "np": np}) 
-            y1 = np.linspace(-10, 10, 400)
+            # y1 = np.linspace(-10, 10, 400)
             
-            plt.figure(figsize=(8, 6))
-            plt.plot(x, y, label=expression)
-            plt.xlabel("x")
-            plt.ylabel("y")
-            plt.title("Graph of " + expression)
-            plt.legend()
-            plt.grid(True)
+            # plt.figure(figsize=(8, 6))
+            # plt.plot(x, y, label=expression)
+            # plt.xlabel("x")
+            # plt.ylabel("y")
+            # plt.title("Graph of " + expression)
+            # plt.legend()
+            # plt.grid(True)
 
-            #plt.plot(0, y1)
+            # #plt.plot(0, y1)
 
-            plt.show()
+            # plt.show()
+
+            frameing = ctk.CTkFrame(main_frame, width=500, height=700)
+            frameing.pack(pady=20, padx=20, fill="both")
+
+            fig, ax = plt.subplots()
+            ax.plot(x, y, label=f"Graphic of {expression}")
+            ax.set_xlabel("X-Axis")
+            ax.set_ylabel("Y-Axis")
+            ax.legend()
+            canvas = FigureCanvasTkAgg(fig, master=frameing)  
+            canvas_widget = canvas.get_tk_widget()      
+            canvas_widget.pack(fill="both")
         except Exception as e:
             messagebox.showerror("Error", f"Invalid input: {e}")
 
