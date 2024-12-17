@@ -113,6 +113,8 @@ def set_page():
     )
     lb.pack(pady=100)
 
+    
+
     def switcher():
         if switch_var.get() == "on":
             ctk.set_appearance_mode("dark")
